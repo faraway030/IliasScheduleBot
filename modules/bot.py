@@ -61,8 +61,9 @@ class Bot(object):
             
             exists = 0
             for line in reader:
-                if line[1] == str(user.id):
-                    exists = 1
+                if line:
+                    if line[1] == str(user.id):
+                        exists = 1
         
         # Add user if not exists
         if exists == 0:
