@@ -15,14 +15,12 @@ My retraining provider is using the ilias learning platform and since I felt ver
 
 Now you can start the bot just by exectuting `python3 main.py` or create a cronjob/service for running it automatically.
 
-### Docker
+###  [Docker](https://hub.docker.com/r/faraway030/iliasschedulebot)
 - Pull the image (`docker pull faraway030/iliasschedulebot:latest`)
 - Create a local folder for storing persistent data.
 - Create the `config.txt` as described below in your persistent data folder.
 - Create the container (`docker container create -v PATH_TO_YOUR_PERSISTENT_DATA_FOLDER:/bot/data/ --name NAME faraway030/iliasschedulebot:latest`) with your path and container name
 - Run the container (`docker container start NAME`)
-
-[dockerhub repository](https://hub.docker.com/repository/docker/faraway030/iliasschedulebot)
 
 ### Configuration
 Create `config.txt` with the following content in `data/` and add your values.
