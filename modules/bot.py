@@ -57,7 +57,7 @@ class Bot(object):
         user = update.message.from_user
         
         # Check if user already exists
-        with open('/bot/data/users.csv', mode="r") as csvfile:
+        with open(self.users, mode="r") as csvfile:
             reader = csv.reader(csvfile, delimiter=';')
             
             exists = 0
@@ -69,7 +69,7 @@ class Bot(object):
         
         # Add user if not exists
         if exists == 0:
-            with open('/bot/data/users.csv', mode='a+') as csvfile:
+            with open(self.users, mode='a+') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow([user.name, user.id])
                 
@@ -106,7 +106,7 @@ class Bot(object):
             self.logger.error(e)
 
     def send_schedule(self):
-        with open('/bot/data/users.csv', mode="r") as csvfile:
+        with open(self.users, mode="r") as csvfile:
             users = csv.reader(csvfile, delimiter=';')
             
             # Logentry
