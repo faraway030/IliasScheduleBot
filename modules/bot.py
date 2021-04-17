@@ -37,6 +37,7 @@ class Bot(object):
         self.filename = filename
         self.appdir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         self.file = self.appdir + "/data/" + filename
+        self.users = self.appdir + "/data/users.csv"
         
         # Handler
         self.updater = Updater(token=self.token, use_context=True)
@@ -65,6 +66,7 @@ class Bot(object):
                     if line[1] == str(user.id):
                         exists = 1
         
+        
         # Add user if not exists
         if exists == 0:
             with open('/bot/data/users.csv', mode='a+') as csvfile:
@@ -74,7 +76,6 @@ class Bot(object):
                 # Logentry
                 self.logger.info('New user ' + user.name + " with ID " + str(user.id))      
                 
-        
         
         # Send welcome message
         self.bot.send_sticker(chat_id=update.effective_chat.id, sticker=self.Sticker.welcome)
@@ -125,6 +126,22 @@ class Bot(object):
                     # Logentry
                     self.logger.info("... sent to: " + uid + " / " + uname)
                 
+                # Delete user from csv-file when user has stopped the bot
+                except telegram.error.Unauthorized as e:
+                    # read file into buffer, except user to delete
+                    buf = {}
+                    with open(self.users, mode='r') as csvfile:
+                        reader = csv.reader(csvfile, delimiter=";")
+                        for line in reader:
+                            if not user[1] == line[1]:
+                                buf[line[1]] = line[0]
+                    
+                    # write buffer to file            
+                    with open(self.users, mode='w') as csvfile:
+                        writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                        for _id, name in buf:
+                            writer.writerow([name, _id])
+                        
                 except telegram.TelegramError as e:
                     self.logger.error(e + " -> " + uid + " / " + uname)
                 
