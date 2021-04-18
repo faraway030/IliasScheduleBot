@@ -54,6 +54,9 @@ class Bot(object):
         self.start()
 
     def load_sticker(self):
+        # used keys:
+        #   - welcome
+        #   - attention
         self.sticker = {}
         with open(self.appdir + "/data/sticker.csv", mode="r") as csvfile:
             reader = csv.reader(csvfile, delimiter="=")
