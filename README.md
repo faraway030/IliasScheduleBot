@@ -54,7 +54,7 @@ step2 =
 - Fix crosslink error when setting tmp-dir outside of /bot/data (Docker related)
 - ~~Remove unsubscribed users from users.csv~~
 - Save and load messages from customizable file in /bot/data
-- Save and load stickers from customizable file in /bot/data
+- ~~Save and load stickers from customizable file in /bot/data~~
 
 ## Contributions
 Contributions of any kind are welcome.
