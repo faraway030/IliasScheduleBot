@@ -26,12 +26,6 @@ class Bot(object):
         update = "Es ist ein neuer Stundenplan verfügbar:"
         cantanswer = "Auf Nachrichten antworten kann ich leider noch nicht."
 
-    # TODO: Save and load stickers from customizable file in /bot/data
-    class Sticker:
-        # predefining stickers
-        welcome = "CAACAgIAAxkBAAEBnihfvXVCnmdMczzTFo3rcbpi9ij1xQACvgADJQNSDwrA0aYECcLxHgQ"
-        attention = "CAACAgIAAxkBAAEBnjZfvXbDq7NPEhfTe4bgOfP5YaK5GAACyQADJQNSD-zuumaYUqrHHgQ"
-
     def __init__(self, token, filename):
         #   Config
         self.token = token
@@ -48,6 +42,9 @@ class Bot(object):
         # Instances
         self.bot = telegram.Bot(self.token)
 
+        # Load stickers
+        self.load_sticker()
+
         #  Logger
         logging.basicConfig(
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -55,6 +52,14 @@ class Bot(object):
 
         # Start the bot
         self.start()
+
+    def load_sticker(self):
+        self.sticker = {}
+        with open(self.appdir + "/data/sticker.csv", mode="r") as csvfile:
+            reader = csv.reader(csvfile, delimiter="=")
+            for line in reader:
+                if not line[0] == "":
+                    self.sticker[line[0]] = line[1]
 
     def h_start(self, update, context):
         user = update.message.from_user
@@ -82,7 +87,7 @@ class Bot(object):
 
         # Send welcome message
         self.bot.send_sticker(
-            chat_id=update.effective_chat.id, sticker=self.Sticker.welcome)
+            chat_id=update.effective_chat.id, sticker=self.sticker['welcome'])
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=self.Msg.welcome % (user.name))
         with open(self.file, "rb") as file:
@@ -117,9 +122,6 @@ class Bot(object):
         with open(self.users, mode="r") as csvfile:
             users = csv.reader(csvfile, delimiter=';')
 
-            # Logentry
-            self.logger.info("Begin distributing new schedule:")
-
             for user in users:
                 uname = user[0]
                 uid = user[1]
@@ -127,7 +129,7 @@ class Bot(object):
                 # Send messages
                 try:
                     self.bot.send_sticker(
-                        chat_id=uid, sticker=self.Sticker.attention)
+                        chat_id=uid, sticker=self.sticker['attention'])
                     self.bot.send_message(chat_id=uid, text=self.Msg.update)
                     with open(self.file, "rb") as file:
                         self.bot.sendDocument(
