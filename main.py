@@ -3,7 +3,8 @@
 
 # Copyright (c) 2021, Steven Bruck
 
-import time, os
+import time
+import os
 import modules.ilias as Ilias
 from modules.bot import Bot
 from configparser import ConfigParser
@@ -12,14 +13,14 @@ from configparser import ConfigParser
 if os.path.exists('/bot/data/config.txt'):
     config = ConfigParser()
     config.read_file(open(r'data/config.txt'))
-    
+
     # Load general config
     filename = config.get('General', 'filename')
     interval = int(config.get('General', 'update'))
-    
+
     # Load bot config
     token = config.get('Telegram', 'token')
-    
+
     # Load ilias config
     username = config.get('Ilias', 'username')
     pwd = config.get('Ilias', 'password')
@@ -30,10 +31,10 @@ if os.path.exists('/bot/data/config.txt'):
 else:
     print("No config found")
     exit(1)
-    
+
 # Create users.csv if it not exists
 if not os.path.exists('/bot/data/users.csv'):
-    open('/bot/data/users.csv',mode='w')
+    open('/bot/data/users.csv', mode='w')
 
 #   Ilias Instance
 ilias = Ilias.Schedule(username, pwd, filename, timeout, url, step1, step2)
