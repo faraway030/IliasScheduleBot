@@ -50,6 +50,10 @@ else:
 # Create users.csv if it not exists
 if not os.path.exists('/bot/data/users.csv'):
     open('/bot/data/users.csv', mode='w')
+    
+# Create sticker.csv if it not exists
+if not os.path.exists('/bot/data/sticker.csv'):
+    open('/bot/data/users.csv', mode='w')
 
 #   Ilias Instance
 ilias = Ilias.Schedule(username, pwd, filename, timeout, url, step1, step2)
