@@ -48,13 +48,21 @@ step1 =
 # name of the download link at the schedule page
 step2 = 
 ```
+<br>
+
+Create `users.csv` with your sticker id's in `data/`.
+
+```
+welcome=CAACAgIAAxkBAAEBnihfvXVCnmdMczzTFo3rcbpi9ij1xQACvgADJQNSDwrA0aYECcLxHgQ
+attention=CAACAgIAAxkBAAEBnjZfvXbDq7NPEhfTe4bgOfP5YaK5GAACyQADJQNSD-zuumaYUqrHHgQ
+```
 
 ## To do
 
 - Fix crosslink error when setting tmp-dir outside of /bot/data (Docker related)
-- ~~Remove unsubscribed users from users.csv~~
-- Save and load messages from customizable file in /bot/data
-- ~~Save and load stickers from customizable file in /bot/data~~
+- Change docker base to alpine
+- Web-Interface / Admin-Panel
+- Change from csv to database
 
 ## Contributions
 Contributions of any kind are welcome.
