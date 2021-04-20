@@ -23,6 +23,12 @@ import os
 import modules.ilias as Ilias
 from modules.bot import Bot
 from configparser import ConfigParser
+import geckodriver_autoinstaller
+
+# Check if the current version of geckodriver exists
+# and if it doesn't exist, download it automatically,
+# then add geckodriver to path
+geckodriver_autoinstaller.install()
 
 # check for existing config
 if os.path.exists('/bot/data/config.txt'):
