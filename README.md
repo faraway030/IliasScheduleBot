@@ -9,16 +9,16 @@ My retraining provider is using the ilias learning platform and since I felt ver
 ## Installation & Usage
 ### Linux
 - Clone the repository (`git clone https://github.com/faraway030/IliasScheduleBot.git`)
-- Install firefox & geckodriver (`apt update && apt install firefox firefox-geckodriver`) or similar command for your packet manager
+- Install firefox (`apt update && apt install firefox`) or similar command for your packet manager
 - Install python requirements (`python3 -m pip install -r requirements.txt`)
-- Create a folder `data/` containing the `config.txt` as described below. 
+- Create a folder `data/` containing the `config.txt` and `sticker.csv` as described below. 
 
 Now you can start the bot just by exectuting `python3 main.py` or create a cronjob/service for running it automatically.
 
 ###  [Docker](https://hub.docker.com/r/faraway030/iliasschedulebot)
 - Pull the image (`docker pull faraway030/iliasschedulebot:latest`)
 - Create a local folder for storing persistent data.
-- Create the `config.txt` as described below in your persistent data folder.
+- Create the `config.txt` and `sticker.csv` as described below in your persistent data folder.
 - Create the container (`docker container create -v PATH_TO_YOUR_PERSISTENT_DATA_FOLDER:/bot/data/ --name NAME faraway030/iliasschedulebot:latest`) with your path and container name
 - Run the container (`docker container start NAME`)
 
@@ -60,7 +60,7 @@ attention=CAACAgIAAxkBAAEBnjZfvXbDq7NPEhfTe4bgOfP5YaK5GAACyQADJQNSD-zuumaYUqrHHg
 ## To do
 
 - Fix crosslink error when setting tmp-dir outside of /bot/data (Docker related)
-- Change docker base to alpine
+- ~~Change docker base to alpine~~
 - Web-Interface / Admin-Panel
 - Change from csv to database
 
