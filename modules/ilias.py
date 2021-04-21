@@ -27,6 +27,7 @@ import time
 import filecmp
 import os
 import logging
+import geckodriver_autoinstaller
 
 
 class Schedule(object):
@@ -64,6 +65,11 @@ class Schedule(object):
         logging.basicConfig(
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
         self.logger = logging.getLogger("ILIAS")
+
+        # Check if the current version of geckodriver exists
+        # and if it doesn't exist, download it automatically,
+        # then add geckodriver to path
+        geckodriver_autoinstaller.install()
 
     def compare(self):
         # Compare files, return result and replace pdf on update

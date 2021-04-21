@@ -23,15 +23,9 @@ import os
 import modules.ilias as Ilias
 from modules.bot import Bot
 from configparser import ConfigParser
-import geckodriver_autoinstaller
-
-# Check if the current version of geckodriver exists
-# and if it doesn't exist, download it automatically,
-# then add geckodriver to path
-geckodriver_autoinstaller.install()
 
 # check for existing config
-if os.path.exists('/bot/data/config.txt'):
+if os.path.exists('data/config.txt'):
     config = ConfigParser()
     config.read_file(open(r'data/config.txt'))
 
@@ -54,12 +48,12 @@ else:
     exit(1)
 
 # Create users.csv if it not exists
-if not os.path.exists('/bot/data/users.csv'):
-    open('/bot/data/users.csv', mode='w')
-    
+if not os.path.exists('data/users.csv'):
+    open('data/users.csv', mode='w')
+
 # Create sticker.csv if it not exists
-if not os.path.exists('/bot/data/sticker.csv'):
-    open('/bot/data/users.csv', mode='w')
+if not os.path.exists('data/sticker.csv'):
+    open('data/users.csv', mode='w')
 
 #   Ilias Instance
 ilias = Ilias.Schedule(username, pwd, filename, timeout, url, step1, step2)
