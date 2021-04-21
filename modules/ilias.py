@@ -27,7 +27,6 @@ import time
 import filecmp
 import os
 import logging
-import geckodriver_autoinstaller
 
 
 class Schedule(object):
