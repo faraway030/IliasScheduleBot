@@ -15,13 +15,12 @@ Copyright (C) 2021  Steven Bruck
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.c
 '''
 
 import time
 import os
-import modules.ilias as Ilias
-from modules.bot import Bot
+from modules.ilias import Ilias
 from configparser import ConfigParser
 
 # check for existing config
@@ -55,14 +54,11 @@ if not os.path.exists('data/users.csv'):
 if not os.path.exists('data/sticker.csv'):
     open('data/users.csv', mode='w')
 
-#   Ilias Instance
-ilias = Ilias.Schedule(username, pwd, filename, timeout, url, step1, step2)
-
 #   Bot Instance
-b = Bot(token, filename)
+bot = Ilias(token, username, pwd, filename, timeout, url, step1, step2)
 
 # call update() at specific interval and send update if available
 while True:
-    if ilias.update():
-        b.send_schedule()
+    if bot.update():
+        bot.send_schedule()
     time.sleep(interval)

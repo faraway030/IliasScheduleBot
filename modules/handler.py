@@ -27,7 +27,7 @@ import csv
 import os
 
 
-class Bot(object):
+class BotHandler(telegram.Bot):
     # TODO: Save and load messages from customizable file in /bot/data
     class Msg:
         # predefining messages
@@ -42,23 +42,21 @@ class Bot(object):
         cantanswer = "Auf Nachrichten antworten kann ich leider noch nicht."
 
     def __init__(self, token, filename):
+        super(BotHandler, self).__init__(token)
+
         #   Config
-        self.token = token
-        self.filename = filename
-        self.appdir = os.path.abspath(
+        self.__filename = filename
+        self.__appdir = os.path.abspath(
             os.path.join(os.path.dirname(__file__), '..'))
-        self.file = self.appdir + "/data/" + filename
-        self.users = self.appdir + "/data/users.csv"
+        self.__file = self.__appdir + "/data/" + filename
+        self.__users = self.__appdir + "/data/users.csv"
 
         # Handler
-        self.updater = Updater(token=self.token, use_context=True)
-        self.dispatcher = self.updater.dispatcher
-
-        # Instances
-        self.bot = telegram.Bot(self.token)
+        self.__updater = Updater(token=token, use_context=True)
+        self.__dispatcher = self.__updater.dispatcher
 
         # Load stickers
-        self.load_sticker()
+        self.__load_sticker()
 
         #  Logger
         logging.basicConfig(
@@ -66,24 +64,24 @@ class Bot(object):
         self.logger = logging.getLogger("BOT")
 
         # Start the bot
-        self.start()
+        self.__start()
 
-    def load_sticker(self):
+    def __load_sticker(self):
         # used keys:
         #   - welcome
         #   - attention
-        self.sticker = {}
-        with open(self.appdir + "/data/sticker.csv", mode="r") as csvfile:
+        self.__sticker = {}
+        with open(self.__appdir + "/data/sticker.csv", mode="r") as csvfile:
             reader = csv.reader(csvfile, delimiter="=")
             for line in reader:
                 if not line[0] == "":
-                    self.sticker[line[0]] = line[1]
+                    self.__sticker[line[0]] = line[1]
 
-    def h_start(self, update, context):
+    def __h_start(self, update, context):
         user = update.message.from_user
 
         # Check if user already exists
-        with open(self.users, mode="r") as csvfile:
+        with open(self.__users, mode="r") as csvfile:
             reader = csv.reader(csvfile, delimiter=';')
 
             exists = 0
@@ -94,7 +92,7 @@ class Bot(object):
 
         # Add user if not exists
         if exists == 0:
-            with open(self.users, mode='a+') as csvfile:
+            with open(self.__users, mode='a+') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';',
                                     quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow([user.name, user.id])
@@ -105,14 +103,14 @@ class Bot(object):
 
         # Send welcome message
         self.bot.send_sticker(
-            chat_id=update.effective_chat.id, sticker=self.sticker['welcome'])
+            chat_id=update.effective_chat.id, sticker=self.__sticker['welcome'])
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=self.Msg.welcome % (user.name))
-        with open(self.file, "rb") as file:
+        with open(self.__file, "rb") as file:
             context.bot.send_document(
-                chat_id=update.effective_chat.id, document=file, filename=self.filename)
+                chat_id=update.effective_chat.id, document=file, filename=self.__filename)
 
-    def h_echo(self, update, context):
+    def __h_echo(self, update, context):
         user = update.message.from_user
 
         # Logentry
@@ -122,22 +120,23 @@ class Bot(object):
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=self.Msg.cantanswer)
 
-    def start(self):
+    def __start(self):
         # Start handler
-        self.echo_handler = MessageHandler(
-            Filters.text & (~Filters.command), self.h_echo)
-        self.start_handler = CommandHandler('start', self.h_start)
-        self.dispatcher.add_handler(self.echo_handler)
-        self.dispatcher.add_handler(self.start_handler)
+        self.__echo_handler = MessageHandler(
+            Filters.text & (~Filters.command), self.__h_echo)
+        self.__start_handler = CommandHandler('start', self.__h_start)
+        self.__dispatcher.add_handler(self.__echo_handler)
+        self.__dispatcher.add_handler(self.__start_handler)
 
         # Start polling
         try:
-            self.updater.start_polling()
+            self.__updater.start_polling()
+            self.logger.info("Started")
         except Exception as e:
             self.logger.error(e)
 
     def send_schedule(self):
-        with open(self.users, mode="r") as csvfile:
+        with open(self.__users, mode="r") as csvfile:
             users = csv.reader(csvfile, delimiter=';')
 
             for user in users:
@@ -147,11 +146,11 @@ class Bot(object):
                 # Send messages
                 try:
                     self.bot.send_sticker(
-                        chat_id=uid, sticker=self.sticker['attention'])
+                        chat_id=uid, sticker=self.__sticker['attention'])
                     self.bot.send_message(chat_id=uid, text=self.Msg.update)
-                    with open(self.file, "rb") as file:
+                    with open(self.__file, "rb") as file:
                         self.bot.sendDocument(
-                            chat_id=uid, document=file, filename=self.filename)
+                            chat_id=uid, document=file, filename=self.__filename)
 
                     # Logentry
                     self.logger.info("... sent to: " + uid + " / " + uname)
@@ -160,14 +159,14 @@ class Bot(object):
                 except telegram.error.Unauthorized as e:
                     # read file into buffer, except user to delete
                     buf = {}
-                    with open(self.users, mode='r') as csvfile:
+                    with open(self.__users, mode='r') as csvfile:
                         reader = csv.reader(csvfile, delimiter=";")
                         for line in reader:
                             if not user[1] == line[1]:
                                 buf[line[1]] = line[0]
 
                     # write buffer to file
-                    with open(self.users, mode='w') as csvfile:
+                    with open(self.__users, mode='w') as csvfile:
                         writer = csv.writer(
                             csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                         for _id, name in buf:
