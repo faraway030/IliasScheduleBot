@@ -50,7 +50,7 @@ step2 =
 ```
 <br>
 
-Create `users.csv` with your sticker id's in `data/`.
+Create `sticker.csv` with your sticker id's in `data/`.
 
 ```
 welcome=CAACAgIAAxkBAAEBnihfvXVCnmdMczzTFo3rcbpi9ij1xQACvgADJQNSDwrA0aYECcLxHgQ
