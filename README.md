@@ -9,7 +9,7 @@ My retraining provider is using the ilias learning platform and since I felt ver
 ## Installation & Usage
 ### Linux
 - Clone the repository (`git clone https://github.com/faraway030/IliasScheduleBot.git`)
-- Install firefox (`apt update && apt install firefox`) or similar command for your packet manager
+- Install firefox & geckodriver (`apt update && apt install firefox firefox-geckodriver`) or similar command for your packet manager
 - Install python requirements (`python3 -m pip install -r requirements.txt`)
 - Create a folder `data/` containing the `config.txt` and `sticker.csv` as described below. 
 
