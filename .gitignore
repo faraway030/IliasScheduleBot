@@ -1,6 +1,5 @@
-.vscode
-__pycache__/
-modules/__pycache__/
+**/.vscode
+**/__pycache__/
 tmp/
 data/
 config.txt

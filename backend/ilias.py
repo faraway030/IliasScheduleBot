@@ -18,7 +18,7 @@ Copyright (C) 2021  Steven Bruck
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 '''
 
-from modules.handler import BotHandler
+from backend.handler import BotHandler
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -49,7 +49,7 @@ class Ilias(BotHandler):
         self.__tempFile = self.__tempdir + "/" + filename
         self.__file = self.__appdir + "/data/" + filename
 
-        # Configure browser
+        # Firefox profile
         self.__fp = webdriver.FirefoxProfile()
         self.__fp.set_preference("browser.download.folderList", 2)
         self.__fp.set_preference(
@@ -58,6 +58,8 @@ class Ilias(BotHandler):
         self.__fp.set_preference(
             "browser.helperApps.neverAsk.saveToDisk", "application/pdf")
         self.__fp.set_preference("pdfjs.disabled", True)
+        
+        # Firefox options
         self.__options = Options()
         self.__options.binary_location = '/usr/bin/firefox'
         self.__options.headless = True

@@ -4,7 +4,7 @@
 My retraining provider is using the ilias learning platform and since I felt very annoying, to check a few times a week if there is a new schedule available, I just wrote this bot. It checks if there is a new schedule and distribute it to all subscribers. This way, you simply get a telegram message with a pdf-file, each time there is a new schedule available.
 
 ## Sample
-![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/demo.png) ![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/demo2.png)
+![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/images/demo.png) ![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/images/demo2.png)
 
 ## Installation & Usage
 ### Linux
@@ -60,7 +60,6 @@ attention=CAACAgIAAxkBAAEBnjZfvXbDq7NPEhfTe4bgOfP5YaK5GAACyQADJQNSD-zuumaYUqrHHg
 ## To do
 
 - Fix crosslink error when setting tmp-dir outside of /bot/data (Docker related)
-- ~~Change docker base to alpine~~
 - Web-Interface / Admin-Panel
 - Change from csv to database
 

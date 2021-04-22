@@ -20,7 +20,7 @@ Copyright (C) 2021  Steven Bruck
 
 import time
 import os
-from modules.ilias import Ilias
+from backend.ilias import Ilias
 from configparser import ConfigParser
 
 # check for existing config
