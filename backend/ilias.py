@@ -58,7 +58,7 @@ class Ilias(BotHandler):
         self.__fp.set_preference(
             "browser.helperApps.neverAsk.saveToDisk", "application/pdf")
         self.__fp.set_preference("pdfjs.disabled", True)
-        
+
         # Firefox options
         self.__options = Options()
         self.__options.binary_location = '/usr/bin/firefox'
