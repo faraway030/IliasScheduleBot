@@ -3,17 +3,14 @@
 
 '''
 Copyright (C) 2021  Steven Bruck
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 '''
@@ -102,7 +99,7 @@ class BotHandler(telegram.Bot):
                                  " with ID " + str(user.id))
 
         # Send welcome message
-        self.bot.send_sticker(
+        self.send_sticker(
             chat_id=update.effective_chat.id, sticker=self.__sticker['welcome'])
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=self.Msg.welcome % (user.name))
@@ -145,11 +142,11 @@ class BotHandler(telegram.Bot):
 
                 # Send messages
                 try:
-                    self.bot.send_sticker(
-                        chat_id=uid, sticker=self.__sticker['attention'])
-                    self.bot.send_message(chat_id=uid, text=self.Msg.update)
+                    print(f'User: {uname} with ID: {uid}')
+                    self.send_sticker(chat_id=uid, sticker=self.__sticker['attention'])
+                    self.send_message(chat_id=uid, text=self.Msg.update)
                     with open(self.__file, "rb") as file:
-                        self.bot.sendDocument(
+                        self.sendDocument(
                             chat_id=uid, document=file, filename=self.__filename)
 
                     # Logentry

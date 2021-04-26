@@ -3,3 +3,5 @@
 tmp/
 data/
 config.txt
+**/webui
+**/src
