@@ -15,7 +15,7 @@ Copyright (C) 2021  Steven Bruck
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 '''
 
-from backend.handler import BotHandler
+from bot.handler import BotHandler
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
