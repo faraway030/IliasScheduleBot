@@ -1,16 +1,10 @@
 # Ilias Schedule Bot
 
-## Table of content
-
 ## Description
 My retraining provider uses the ILIAS learning platform and since I felt very annoying to check a few times a week if there is a new schedule available, I just wrote this bot. It checks if there is a new schedule and distributes it to all subscribers. This way, you simply get a telegram message with a pdf file each time a new schedule is available.
 
 ## Sample
 ![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/images/demo.png) ![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/images/demo2.png)
-
-## Release notes v2.0
-- bla
-- bla
 
 ## Installation & Usage
 
