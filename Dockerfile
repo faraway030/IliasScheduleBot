@@ -23,7 +23,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 
 WORKDIR /bot
 COPY main.py .
-COPY backend/handler.py backend/
-COPY backend/ilias.py backend/
+COPY bot/handler.py backend/
+COPY bot/ilias.py backend/
 
 ENTRYPOINT ["python3", "main.py"]

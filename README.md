@@ -1,19 +1,18 @@
 # Ilias Schedule Bot
 
+## Table of content
+
 ## Description
-My retraining provider is using the ilias learning platform and since I felt very annoying, to check a few times a week if there is a new schedule available, I just wrote this bot. It checks if there is a new schedule and distribute it to all subscribers. This way, you simply get a telegram message with a pdf-file, each time there is a new schedule available.
+My retraining provider uses the ILIAS learning platform and since I felt very annoying to check a few times a week if there is a new schedule available, I just wrote this bot. It checks if there is a new schedule and distributes it to all subscribers. This way, you simply get a telegram message with a pdf file each time a new schedule is available.
 
 ## Sample
 ![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/images/demo.png) ![Demo PNG Image](https://github.com/faraway030/IliasScheduleBot/raw/master/images/demo2.png)
 
-## Installation & Usage
-### Linux
-- Clone the repository (`git clone https://github.com/faraway030/IliasScheduleBot.git`)
-- Install firefox & geckodriver (`apt update && apt install firefox firefox-geckodriver`) or similar command for your packet manager
-- Install python requirements (`python3 -m pip install -r requirements.txt`)
-- Create a folder `data/` containing the `config.txt` and `sticker.csv` as described below. 
+## Release notes v2.0
+- bla
+- bla
 
-Now you can start the bot just by exectuting `python3 main.py` or create a cronjob/service for running it automatically.
+## Installation & Usage
 
 ###  [Docker](https://hub.docker.com/r/faraway030/iliasschedulebot)
 - Pull the image (`docker pull faraway030/iliasschedulebot:latest`)

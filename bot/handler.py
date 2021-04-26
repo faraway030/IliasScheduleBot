@@ -102,7 +102,7 @@ class BotHandler(telegram.Bot):
                                  " with ID " + str(user.id))
 
         # Send welcome message
-        self.bot.send_sticker(
+        self.send_sticker(
             chat_id=update.effective_chat.id, sticker=self.__sticker['welcome'])
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=self.Msg.welcome % (user.name))
@@ -145,11 +145,11 @@ class BotHandler(telegram.Bot):
 
                 # Send messages
                 try:
-                    self.bot.send_sticker(
-                        chat_id=uid, sticker=self.__sticker['attention'])
-                    self.bot.send_message(chat_id=uid, text=self.Msg.update)
+                    print(f'User: {uname} with ID: {uid}')
+                    self.send_sticker(chat_id=uid, sticker=self.__sticker['attention'])
+                    self.send_message(chat_id=uid, text=self.Msg.update)
                     with open(self.__file, "rb") as file:
-                        self.bot.sendDocument(
+                        self.sendDocument(
                             chat_id=uid, document=file, filename=self.__filename)
 
                     # Logentry
